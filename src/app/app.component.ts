@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Itodo } from './itodo';
+import { LoggingService } from './logging.service';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +14,23 @@ export class AppComponent implements OnInit {
       this.todos = JSON.parse(data);
     }
   }
-  todos = [
-    { todo: 'Buy groceries', done: false },
-    { todo: 'Water plants', done: false },
-    { todo: 'Clean the flat', done: true },
-  ];
+
+  constructor(private loggingservice: LoggingService) {}
+
+  todos: Itodo[] = [];
 
   newTodo = '';
+
+  logging(msg: any) {
+    this.loggingservice.log(msg);
+  }
 
   addTodo() {
     if (this.newTodo.trim() !== '') {
       this.todos.push({ todo: this.newTodo, done: false });
     }
     this.storeTodo();
+    this.logging(this.todos);
   }
 
   storeTodo() {
