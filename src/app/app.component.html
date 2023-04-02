@@ -1,10 +1,14 @@
 <div class="mt-10 bg-gray-600 text-white m-auto w-1/2">
   <div class="text-center border-black border-2 py-2">
     <h1 class="text-3xl">To Do App</h1>
-    <p>To Do's: 0</p>
+    <p>To complete: {{ countTodos().length }}</p>
     <div class="flex justify-between py-2">
-      <input type="text" class="py-2 w-5/6 text-black" />
-      <button class="py-2 w-1/6 bg-blue-500">Add</button>
+      <input
+        type="text"
+        class="py-2 w-5/6 text-black"
+        (keyup)="setTodo($event)"
+      />
+      <button class="py-2 w-1/6 bg-blue-500" (click)="addTodo()">Add</button>
     </div>
   </div>
   <div *ngFor="let todo of todos; let i = index">

@@ -12,6 +12,26 @@ export class AppComponent {
     { todo: 'Clean the flat', done: true },
   ];
 
+  newTodo = '';
+
+  addTodo() {
+    if (this.newTodo.trim() !== '') {
+      this.todos.push({ todo: this.newTodo, done: false });
+    }
+  }
+
+  countTodos() {
+    const done = this.todos.filter((item) => {
+      return !item.done;
+    });
+    return done;
+  }
+
+  setTodo(event: KeyboardEvent) {
+    this.newTodo = (event.target as HTMLInputElement).value;
+    console.log(this.newTodo);
+  }
+
   toggleTodo(index: number) {
     this.todos[index].done = !this.todos[index].done;
   }
